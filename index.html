@@ -12,8 +12,8 @@
 <body>
 
     <div class="site-header">
-        <div class="ascii-title">Picker.exe</div>
-        <div class="header-sub">// beacuse my barin is legalli dead</div>
+        <div class="ascii-title">picker.exe</div>
+        <div class="header-sub">// because my brain is legally dead</div>
         <div class="header-tag">
             ver 0.0.3_alpha<br />
             [NOT STABLE]<br />
@@ -31,11 +31,11 @@
             <button onclick="addOption()">+ADD</button>
         </div>
 
-        <ul class="option-list" id="optionsList">
+        <ul class="options-list" id="optionsList">
             <li class="empty-hint">nothing here yet. type something above.</li>
         </ul>
 
-        <div class="margin-top:10px;">
+        <div style="margin-top:10px;">
             <button class="txt-btn" onclick="clearAllOptions()">[clear all options]</button>
         </div>
 
@@ -46,33 +46,29 @@
             <div>
                 <div class="sub-label">mood rn</div>
                 <div class="chip-group" id="moodGroup">
-                    <button class="chip" data-mood="lazy" onclick="pickChip(this, 'mood')"> LAZY ASF</button>
-                    <button class="chip" data-mood="healthy" onclick="pickChip(this, 'mood')"> HEALTHY</button>
-                    <button class="chip" data-mood="fun" onclick="pickChip(this, 'mood')"> FUN</button>
-                    <button class="chip" data-mood="quick" onclick="pickChip(this, 'mood')"> QUICK</button>
-
+                    <button class="chip" data-mood="lazy" onclick="pickChip(this,'mood')">LAZY</button>
+                    <button class="chip" data-mood="healthy" onclick="pickChip(this,'mood')">HEALTHY</button>
+                    <button class="chip" data-mood="fun" onclick="pickChip(this,'mood')">FUN</button>
+                    <button class="chip" data-mood="quick" onclick="pickChip(this,'mood')">QUICK</button>
+                </div>
+            </div>
+            <div>
+                <div class="sub-label">category</div>
+                <div class="chip-group" id="catGroup">
+                    <button class="chip" data-cat="food" onclick="pickChip(this,'cat')">FOOD</button>
+                    <button class="chip" data-cat="movies" onclick="pickChip(this,'cat')">MOVIES</button>
+                    <button class="chip" data-cat="study" onclick="pickChip(this,'cat')">STUDY</button>
+                    <button class="chip" data-cat="general" onclick="pickChip(this,'cat')">GENERAL</button>
                 </div>
             </div>
         </div>
-        <div>
-
-            <div class="sub-label">category</div>
-            <div class="chip-group" id="catGroup">
-                <button class="chip" data-cat="food" onclick="pickChip(this, 'cat')">FOOD</button>
-                <button class="chip" data-cat="movies" onclick="pickChip(this, 'cat')">MOVIES</button>
-                <button class="chip" data-cat="study" onclick="pickChip(this, 'cat')">STUDY</button>
-                <button class="chip" data-cat="movies" onclick="pickChip(this, 'cat')">GENERAL</button>
-
-            </div>
-        </div>
-
 
         <hr class="divider" />
         <div class="sec-label">STEP 3 &mdash; THE VERDICT</div>
 
         <div class="verdict-panel">
-            <div class="result-text" id="resultText">?????</div>
-            <div class="why-text" id="whyText">add options and press the button already</div>
+            <div class="result-text" id="resultText">???</div>
+            <div class="why-text" id="whyText">add options and press the button bro</div>
             <div class="btn-row">
                 <button class="action-btn" onclick="makeDecision()">[ DECIDE ]</button>
                 <button class="ghost-btn" onclick="resetDecision()">reset</button>
@@ -90,7 +86,7 @@
             <div class="wheel-side">
                 <p>
                     for when even clicking "decide" feels like too much effort.
-                    <br><br>
+                    <br /><br />
                     add options above, then spin. thats it. thats the whole feature.
                 </p>
                 <button class="action-btn" onclick="spinWheel()">[ SPIN ]</button>
@@ -101,18 +97,21 @@
         <div class="sec-label">RECENT DECISIONS (last 5)</div>
 
         <ul class="history-rows" id="historyList">
-            <li class="empty-hint">no decisions yet, ur indecisive AND inexperienced</li>
+            <li class="empty-hint">no decisions yet. ur indecisive AND inexperienced.</li>
         </ul>
 
-        <div class="margin-top:12px;">
-            <button class="txt-btn" onclick="clearHistory()"> [clear history]</button>
+        <div style="margin-top:12px;">
+            <button class="txt-btn" onclick="clearHistory()">[clear history]</button>
         </div>
+
     </div>
 
     <div class="footer">
-        // made during exam session. priorities. &nbsp;|&nbsp; github: <a href="https://github.com/krisharv" target="_blank">krisharv</a>
+        // made during exam season. priorities. &nbsp;|&nbsp; github: krisharv
     </div>
+    <script src="script.js">
 
+    </script>
 </body>
 
 </html>
