@@ -344,3 +344,125 @@ body{
     gap: 10px;
     flex-wrap: wrap;
 }
+
+.action-btn {
+    background: var(--green);
+    color: #000;
+    border: none;
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    padding: 8px 28px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    transition: transform 0.1s, background 0.1s;
+}
+
+.action-btn:hover{
+    background: #fff;
+
+}
+
+.active-btn:active {
+    transform: scale(0.97);
+}
+
+.ghost-btn{
+    background: none;
+    border: 1px solid #333;
+    color: var(--dim);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78rem;
+    padding: 8px 16px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.1s;
+}
+
+.ghost-btn:hover {
+    border-color: var(--dim);
+    color: var(--text);
+}
+
+.wheel-area{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.wheel-container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.wheel-ptr {
+    text-align: center;
+    font-size: 1.4rem;
+    color: var(--green);
+    margin-bottom: 4px;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(4px);
+    }
+}
+
+#wheelCanvas {
+    display: block;
+    border: 2px solid var(--green);
+}
+
+.wheel-side {
+    flex: 1;
+    min-width: 160px;
+}
+
+.wheel-side p {
+    color: var(--dim);
+    font-size: 0.78rem;
+    margin-bottom: 14px;
+    line-height: 1.6;
+}
+
+.history-rows {
+    list-style: none;
+}
+
+.hist-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 8px 0;
+    border-bottom: 1px dashed #1e1e1e;
+    gap: 10px;
+    animation: fadeIn 0.2s;
+}
+
+.hist-pick{
+    color: var(--green);
+    font-family: 'VT323', monospace;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+.hist-meta {
+    color: var(--dim);
+    font-size: 0.72rem;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.footer {
+    text-align: center;
+    padding: 30px 20px 10px;
+    color: #2a2a2a;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+}
