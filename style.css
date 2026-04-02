@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,11 +11,10 @@
     --amber: #ffb300;
     --dim: #555;
     --text: #d4d4d4;
-    --panel:#0e0e0e;
-
+    --panel: #0e0e0e;
 }
 
-body{
+body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Share Tech Mono', monospace;
@@ -29,7 +28,7 @@ body{
     padding-bottom: 60px;
 }
 
-.site-header{
+.site-header {
     border-bottom: 3px double var(--green);
     padding: 24px 20px 18px;
     position: relative;
@@ -41,10 +40,11 @@ body{
     color: var(--green);
     line-height: 1;
     letter-spacing: 4px;
-    animation:flicker 8s infinite; 
+    animation: flicker 8s infinite;
 }
 
 @keyframes flicker {
+
     0%,
     94%,
     96%,
@@ -60,8 +60,7 @@ body{
     }
 }
 
-
-.header-sub{
+.header-sub {
     color: var(--dim);
     font-size: 0.78rem;
     margin-top: 5px;
@@ -92,7 +91,7 @@ body{
 }
 
 .sec-label {
-    font-family: 'VT323';
+    font-family: 'VT323', monospace;
     font-size: 1.1rem;
     color: var(--amber);
     letter-spacing: 3px;
@@ -120,6 +119,7 @@ body{
     flex: 1;
     background: #000;
     border: none;
+    color: var(--green);
     padding: 10px 14px;
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.95rem;
@@ -129,7 +129,6 @@ body{
 
 .input-row input::placeholder {
     color: #333;
-
 }
 
 .input-row button {
@@ -163,12 +162,12 @@ body{
     animation: fadeIn 0.2s;
 }
 
-.option-items:first-child {
+.option-item:first-child {
     border-top: 1px solid #222;
 }
 
 @keyframes fadeIn {
-    from{
+    from {
         opacity: 0;
         background: #1a1a00;
     }
@@ -193,7 +192,7 @@ body{
 
 .opt-del {
     background: none;
-    border: 1pc solid #333;
+    border: 1px solid #333;
     color: var(--dim);
     font-family: inherit;
     font-size: 0.75rem;
@@ -225,6 +224,7 @@ body{
     letter-spacing: 1px;
     text-decoration: underline dotted;
 }
+
 .txt-btn:hover {
     color: var(--red);
 }
@@ -236,19 +236,19 @@ body{
 }
 
 @media(max-width: 560px) {
-    .two-col{
+    .two-col {
         grid-template-columns: 1fr;
     }
 }
 
-.chip-group{
+.chip-group {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 8px;
 }
 
-.chip{
+.chip {
     background: #000;
     border: 1px solid #333;
     color: var(--dim);
@@ -272,7 +272,7 @@ body{
     font-weight: bold;
 }
 
-.sub-label{
+.sub-label {
     font-size: 0.72rem;
     color: var(--dim);
     letter-spacing: 2px;
@@ -313,19 +313,22 @@ body{
         letter-spacing: 20px;
         opacity: 0;
     }
+
     60% {
         letter-spacing: 1px;
         opacity: 1;
     }
+
     80% {
         letter-spacing: 5px;
     }
+
     100% {
         letter-spacing: 3px;
     }
 }
 
-.result-text.pop{
+.result-text.pop {
     animation: pop 0.45s ease forwards;
 }
 
@@ -357,16 +360,15 @@ body{
     transition: transform 0.1s, background 0.1s;
 }
 
-.action-btn:hover{
+.action-btn:hover {
     background: #fff;
-
 }
 
-.active-btn:active {
+.action-btn:active {
     transform: scale(0.97);
 }
 
-.ghost-btn{
+.ghost-btn {
     background: none;
     border: 1px solid #333;
     color: var(--dim);
@@ -383,7 +385,7 @@ body{
     color: var(--text);
 }
 
-.wheel-area{
+.wheel-area {
     display: flex;
     gap: 30px;
     align-items: center;
@@ -404,6 +406,7 @@ body{
 }
 
 @keyframes bounce {
+
     0%,
     100% {
         transform: translateY(0);
@@ -445,7 +448,7 @@ body{
     animation: fadeIn 0.2s;
 }
 
-.hist-pick{
+.hist-pick {
     color: var(--green);
     font-family: 'VT323', monospace;
     font-size: 1.3rem;
