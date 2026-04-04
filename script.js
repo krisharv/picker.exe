@@ -7,7 +7,7 @@ var wheelSpd = 0;
 
 var wColors = ["#39ff14", "#ff2b2b", "#ffb300", "#00cfff", "#ff69b4", "#c8ff00", "#ff6600", "#a0ff60"];
 
-// ---- OPTIONS ----
+// options
 
 function addOption() {
     var el = document.getElementById("optionInput");
@@ -55,7 +55,7 @@ document.getElementById("optionInput").addEventListener("keydown", function (e) 
     if (e.key === "Enter") addOption();
 });
 
-// ---- CHIPS ----
+// chips
 
 function pickChip(el, type) {
     var gid = type === "mood" ? "moodGroup" : "catGroup";
@@ -67,7 +67,7 @@ function pickChip(el, type) {
     else selCat = el.getAttribute("data-cat");
 }
 
-// ---- DECISION ENGINE ----
+// Decision engine
 
 var reasons = {
     lazy_food: ["easiest thing on the list. no effort required.", "delivery > cooking. always.", "minimum viable meal."],
@@ -114,3 +114,153 @@ function showResult(pick, why) {
     el.classList.add("pop");
     document.getElementById("whyText").textContent = why || "";
 }
+
+function resetDecison() {
+    var el = document.getElementById("resultText");
+    el.textContent = "?????";
+    document.getElementById("whyText").textContent = "add options and press the button bro";
+
+}
+
+// wheel - i used a bit of ai to complete this section
+
+
+function drawWheel() {
+    var cv = document.getElementById("wheelCanvas");
+    var ctx = cv.getContext("2d");
+    var cx = cv.width / 2;
+    var cy = cv.height / 2;
+    var r = cx -4;
+    ctx.clearRect(0, 0, cv.width, cv.height);
+
+    if(!opts.length) {
+        ctx.fillStyle = "#0e0e0e";
+        ctx.fillRect(0, 0, cv.width, cv.height);
+        ctx.fillStyle = "#333";
+        ctx.font = "13px 'Share Tech Mono'";
+        ctx.textAlign = "center";
+        ctx.fillText("add options", cx, cy - 8);
+        ctx.fillText("to see wheel", cx, cy + 12);
+        return;
+    }
+    var arc = (2 * Math.PI) / opts.length;
+    opts.forEach(function (o, i) {
+        var s = wheelRot * (Math.PI / 100) + i * arc;
+        var e = s + arc
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r, s, e);
+        ctx.closePath();
+        ctx.fillStyle = wColors[i % wColors.length];
+        ctx.fill();
+        ctx.strokeStyle = "#080808";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(s + arc / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 11px 'Share Tech Mono'";
+        var lbl = o.length > 9 ? o.slice(0, 8) + "..." : o;
+        ctx.fillText(lbl, r - 6, 4);
+        ctx.restore();
+
+    });
+
+    ctx.beginPath();
+    ctx.arc(cx, cy, 14, 0, 2 * Math.PI );
+    ctx.fillStyle = "#080808";
+    ctx.fill();
+    ctx.strokeStyle = "#39ff14";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+}
+
+function spinWheel() {
+    if (spinning) return;
+    if (!opts.length) { alert("add options first"); return;}
+    spinning = true;
+    wheelSpd = 16 + Math.random() * 12;
+    animSpin();
+}
+
+function animSpin() {
+    wheelSpd *= 0.974;
+    wheelRot += wheelSpd;
+    drawWheel();
+    if (wheelSpd > 0.25) {
+        requestAnimationFrame(animSpin);
+    } else {
+        spinning = false;
+        var winner = getWinner();
+        showResult(winner, "-> wheel decided. no take backs");
+        saveHist(winner, "spin", "wheel");
+
+    }
+}
+
+function getWinner() {
+    var sliceAng = 360 / opts.length;
+    var norm = ((wheelRot % 360) + 360) % 360;
+    var ptr = (270 - norm + 360) % 360;
+    return opts[Math.floor(ptr / sliceAng) % opts.length];
+} 
+
+drawWheel();
+
+// history
+
+function saveHist(pick, mood, cat) {
+    var h = getHist();
+    h.unshift({pick: pick, mood: mood || "?", cat: cat || "?", t:new Date().toLocaleTimeString() });
+    if (h.length > 5) h = h.slice(0, 5);
+    localStorage.setItem("dm3k_hist", JSON.stringify(h));
+    renderHist();
+}
+
+function getHist() {
+    try { return JSON.parse(localStorage.getItem("dm3k_hist")) || [];}
+    catch (e) { return[];}
+}
+
+function renderHist() {
+    var ul = document.getElementById("historyList");
+    var h = getHist();
+    ul.innerHTML = "";
+    if (!h.length) {
+        ul.innerHTML = '<li class="empty-hint">no decisions yet. ur indecisive AND inexperienced.</li>';
+        return;
+    }
+    h.forEach(function(e) {
+        var li = document.createElement("li");
+        li.className = "hist-row";
+        li.innerHTML = '<span class="hist-pick">' + e.pick + '</span>'
+            + '<span class="hist-meta">' + e.mood + ' / ' + e.cat + '<br/>' + e.t + '</span>';
+        ul.appendChild(li);
+        
+
+    });
+}
+
+function clearHistory() {
+    localStorage.removeItem("dm3k_hist");
+    renderHist();
+}
+
+// helpers
+
+function shuffle(a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+}
+
+renderOpts();
+renderHist();
+
+// TODO: add sound
